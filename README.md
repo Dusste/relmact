@@ -18,7 +18,7 @@ import Feeds from '../src/Feeds.elm'
 import Articles from '../src/Articles.elm'
 import style from "../../style.css?raw"; // Import style as raw file
 ...
-export const { MiniApp0, MiniApp1 } = getApps({
+export const { FeedsElm, ArticlesElm } = getApps({
     apps: { Feeds, Articles },
     style
 });
@@ -29,14 +29,14 @@ then import those newly build files wherever you want to use in your React app a
 
 ```javascript
 // YouReactApp.jsx
-import { MiniApp0, MiniApp1 } from './elmAdapter.js';
+import { FeedsElm, ArticlesElm } from './elmAdapter.js';
 ...
 return (
     <>
         <h1>My React app !</h1>
         <div>
-            <MiniApp0 contract={appData} />
-            <MiniApp1 contract={secondAppData} />
+            <FeedsElm contract={appData} />
+            <ArticlesElm contract={secondAppData} />
         </div>
     </>
 );
