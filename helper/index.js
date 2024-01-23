@@ -16,7 +16,7 @@ const transformApps = (apps) => {
 export default ({ apps, style }) => {
   const widgets = transformApps(apps);
 
-  return Object.keys(widgets).reduce((acc, elmAppName, idx) => {
+  return Object.keys(widgets).reduce((acc, elmAppName) => {
     const wrappedDiv = widgets[elmAppName].wrapperDiv;
     const elmAppRef = widgets[elmAppName].elmApp;
     let elmApp;

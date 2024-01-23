@@ -8,7 +8,7 @@ Elm widgets will be consumed in React application as React Custom Components tha
 
 #### How to use ?
 
-Once you've installed package, you can make an adapter. Pass multiple Elm apps to init function and also style that you want to be encapsulated into shadowDom. You will get back baked React components ready to be used.
+Once you've installed package, you can make an adapter. Pass multiple Elm apps to init function and also style that you want to be encapsulated into shadowDom. You will get back baked React components ready to be used. You can anticipate them in YourWidget`Elm` format.
 
 ```javascript
 // elmAdapter.js
