@@ -1,0 +1,23 @@
+{
+  "name": "relmact",
+  "version": "1.0.0",
+  "description": "A way to use your Elm apps as React components",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dusste/relmact.git"
+  },
+  "keywords": [
+    "react",
+    "elm"
+  ],
+  "author": "Dusan Stevanovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dusste/relmact/issues"
+  },
+  "homepage": "https://github.com/Dusste/relmact#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
