@@ -4,7 +4,7 @@
 
 #### What is it under the hood ?
 
-Elm widgets will be consumed in React application as React Custom Components that hold reference to Elm app, encapsulated by the shadowDOM that allow us to inject custom CSS (if needed). Data that you want to feed your component with is passed via props (actually, passed to Elm via ports). Since Elm is subscribed to changes via ports, even if you have, for ex: 30 seconds polling in your React app, Elm app will act upon changes and re-render according to newly received data
+Elm widgets will be consumed in React application as React Custom Components that hold reference to Elm app, encapsulated by the shadowDOM that allow us to inject custom CSS (if needed). Data that you want to feed your component with is passed via props (actually, passed to Elm via ports). Since Elm is subscribed to changes via ports, even if you have, for ex: 30 seconds polling in your React app, Elm app will act upon changes and re-render according to newly received data.
 
 #### How to use ?
 
@@ -19,7 +19,7 @@ import Articles from '../src/Articles.elm'
 import style from "../../style.css?raw"; // Import style as raw file
 ...
 export const { FeedsElm, ArticlesElm } = getApps({
-    apps: { Feeds, Articles },
+    apps: [ Feeds, Articles ],
     style
 });
 ...
@@ -46,7 +46,9 @@ return (
 #### How to build your Elm app ?
 
 You can build your Elm app however you like (just make sure you've checked `disclaimer` section), since data passed from React is send to Elm app via ports, you can pass it as object, array, string or anything that can be passed via ports in Elm, you need to make sure you are decodening value passed from JS.
-- Example of things you would need in your Elm app:
+
+- Example piece of code you would need in your Elm app:
+
 ```elm
 port onContractChange : (Decode.Value -> msg) -> Sub msg
 
@@ -74,8 +76,10 @@ subscriptions _ =
 
 - This package is suitable for those who wants to build several separated Elm programs (Browser.element) in isolation, `this package is NOT suitable for those who wants Browser.document or Browser.application type of Elm program`
 - Since every Elm module should be app for itself, I am referring to it as app or widget
-- For now, there is only one CSS file for custom styling, for all mini apps, if there is a need for style file per widget, please raise a ticket !
+- For now, packege supports only one CSS file for custom styling, for all component, if there is a need for style file per widget, please raise a ticket !
+- You Elm component can use anything for styling purpose (ElmUI, TailwindCSS etc.) ability to pass stylesheet nothing else then complimentary thing, I am storing some animations there.
 - CSS file should come as a raw file, there is a option to import it as a raw file if you use Vite or install package `raw-loader`
+
 ### License
 
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -1,30 +1,31 @@
 import React from "react";
 
 const transformApps = (apps) => {
-  return Object.values(apps).reduce((sum, elmApp) => {
+  return apps.reduce((sum, elmApp) => {
     const elmAppName = elmApp["__elmModulePath"][0];
-    if (!elmAppName) throw new Error("Invalid Elm app passed");
+    if (!elmAppName) throw new Error("Invalid Elm component initialised");
 
-    sum[elmAppName] = {
+    const helperObject = {
+      elmAppName,
       wrapperDiv: document.createElement("div"),
       elmApp,
     };
+    sum.push(helperObject);
     return sum;
-  }, {});
+  }, []);
 };
 
 export default ({ apps, style }) => {
+  if (!apps?.length) throw new Error("You haven't passed Elm components");
   const widgets = transformApps(apps);
 
-  return Object.keys(widgets).reduce((acc, elmAppName) => {
-    const wrappedDiv = widgets[elmAppName].wrapperDiv;
-    const elmAppRef = widgets[elmAppName].elmApp;
-    let elmApp;
+  return widgets.reduce((acc, { elmAppName, wrapperDiv, elmApp }) => {
+    let elmAppInstance;
     let styleElement;
 
     acc[`${elmAppName}Elm`] = ({ contract }) => {
       const init = (node) => {
-        if (!node) throw new Error("No contaier provided");
+        if (!node) throw new Error("No container provided");
 
         const shadowRoot = node.shadowRoot
           ? node.shadowRoot
@@ -40,13 +41,14 @@ export default ({ apps, style }) => {
         // TODO no present stylesheets is indicator that app has not been initialized - FIND BETTER WAY !
         if (![...shadowRoot.styleSheets].length) {
           shadowRoot.appendChild(styleElement);
-          shadowRoot.appendChild(wrappedDiv);
-          elmApp = elmAppRef.init({
-            node: wrappedDiv,
+          shadowRoot.appendChild(wrapperDiv);
+
+          elmAppInstance = elmApp.init({
+            node: wrapperDiv,
           });
         }
 
-        elmApp.ports.onContractChange.send({ contract });
+        elmAppInstance.ports.onContractChange.send({ contract });
       };
 
       return React.createElement("re-elm-act", { ref: init });
