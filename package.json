@@ -1,6 +1,6 @@
 {
   "name": "relmact",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A way to use your Elm apps as React components",
   "main": "app.js",
   "repository": {
