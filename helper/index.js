@@ -26,8 +26,8 @@ let timestamp;
 /**
  * Returns Elm components as React components
  *
- * @param {apps} x Array of Elm apps
- * @param (optional) {style} Stylesheet, must be raw file
+ * @param {apps} apps Array of Elm apps
+ * @param {style} (optional) {style} Stylesheet, must be raw file
  * @return {array} x React apps
  */
 export default ({ apps, style }) => {
