@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * Returns transformed array that contains elm app related stuff
+ *
+ * @param {apps} x Array of Elm apps
+ * @return {array} x Array of objects with keys: elmAppName (String), wapperDiv (Node), elmApp: (Function)
+ */
 const transformApps = (apps) => {
   return apps.reduce((sum, elmApp) => {
     const elmAppName = elmApp["__elmModulePath"][0];
@@ -15,6 +21,15 @@ const transformApps = (apps) => {
   }, []);
 };
 
+let timestamp;
+
+/**
+ * Returns Elm components as React components
+ *
+ * @param {apps} x Array of Elm apps
+ * @param (optional) {style} Stylesheet, must be raw file
+ * @return {array} x React apps
+ */
 export default ({ apps, style }) => {
   if (!apps?.length) throw new Error("You haven't passed Elm components");
   const widgets = transformApps(apps);
@@ -25,11 +40,11 @@ export default ({ apps, style }) => {
 
     acc[`${elmAppName}Elm`] = ({ contract }) => {
       const init = (node) => {
-        if (!node) throw new Error("No container provided");
+        if (!node) return null;
 
-        const shadowRoot = node.shadowRoot
-          ? node.shadowRoot
-          : node.attachShadow({ mode: "closed" });
+        timestamp = Date.now();
+        const shadowRoot =
+          node?.shadowRoot ?? node?.attachShadow({ mode: "open" });
 
         if (style) {
           styleElement = document.createElement("style");
@@ -51,7 +66,7 @@ export default ({ apps, style }) => {
         elmAppInstance.ports.onContractChange.send({ contract });
       };
 
-      return React.createElement("re-elm-act", { ref: init });
+      return React.createElement("re-elm-act", { ref: init, key: timestamp });
     };
     return acc;
   }, {});

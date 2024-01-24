@@ -77,7 +77,7 @@ subscriptions _ =
 - This package is suitable for those who wants to build several separated Elm programs (Browser.element) in isolation, `this package is NOT suitable for those who wants Browser.document or Browser.application type of Elm program`
 - Since every Elm module should be app for itself, I am referring to it as app or widget
 - For now, packege supports only one CSS file for custom styling, for all component, if there is a need for style file per widget, please raise a ticket !
-- You Elm component can use anything for styling purpose (ElmUI, TailwindCSS etc.) ability to pass stylesheet nothing else then complimentary thing, I am storing some animations there.
+- You Elm component can use anything for styling purpose (ElmUI, TailwindCSS etc.) ability to pass stylesheet is nothing else then complimentary thing, for exm. I am storing some animations in style.css
 - CSS file should come as a raw file, there is a option to import it as a raw file if you use Vite or install package `raw-loader`
 
 ### License
