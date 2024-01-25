@@ -51,9 +51,10 @@ export default ({ apps, style }) => {
           const sheet = new CSSStyleSheet();
 
           styleElement.type = "text/css";
-          styleElement.textContent = style;
+          sheet.replaceSync(style);
+          styleElement.textContent = sheet;
         }
-        // TODO no present stylesheets is indicator that app has not been initialized - FIND BETTER WAY !
+        // TODO absent stylesheets is indicator that app has not been initialized
         if (![...shadowRoot.styleSheets].length) {
           shadowRoot.appendChild(styleElement);
           shadowRoot.appendChild(wrapperDiv);
